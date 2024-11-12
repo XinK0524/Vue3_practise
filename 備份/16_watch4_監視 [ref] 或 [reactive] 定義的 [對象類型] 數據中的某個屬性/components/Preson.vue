@@ -1,6 +1,6 @@
 <template>
     <div class="person">
-        <h1>情況五 : 監視上述的多個數據</h1>
+        <h1>情況四 : 監視 [ref] 或 [reactive] 定義的 [對象類型] 數據中的某個屬性</h1>
         <h2>名字:{{person.name}}</h2>
         <h2>幾歲:{{person.age}}</h2>
         <h2>我的車:{{person.car.c1}}{{person.car.c2}}</h2>
@@ -41,8 +41,13 @@ import { walk } from 'vue/compiler-sfc';
         person.car = {c1:"TOYOTA",c2:"YAA"}
     }
 
-     // 監視， 情況五 : 監視上述的多個數據
-    watch([()=> person.name,()=> person.car.c1],(newValue,oldValue)=>{
+    // 監視， 情況四:監視響應式對象中的某個屬性，且該屬性是基本類型的，要寫成函數式
+    // watch(()=>{return person.name},(newValue,oldValue)=>{
+    //     console.log('person.name變化',newValue,oldValue);
+    // })
+    
+     // 監視， 情況四:監視響應式對象中的某個屬性，且該屬性式對象類型的，可以直接寫，也能寫函數，但最推薦寫函數
+    watch(()=> person.car,(newValue,oldValue)=>{
         console.log('person.car變化',newValue,oldValue);
     },{deep:true})
 
