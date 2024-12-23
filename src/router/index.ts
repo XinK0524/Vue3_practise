@@ -3,9 +3,10 @@
 // 第一步: 引入 createRouter
 import { createRouter,createWebHistory } from "vue-router";
 // 引入一個個要呈現的組件
-import Home from "@/components/Home.vue";
-import News from "@/components/News.vue";
-import About from "@/components/About.vue";
+import Home from "@/pages/Home.vue";
+import News from "@/pages/News.vue";
+import About from "@/pages/About.vue";
+import Detail from "@/pages/Detail.vue";
 
 // 第二步: 創建路由器
 const router = createRouter({
@@ -21,7 +22,14 @@ const router = createRouter({
         },
         {
             path:'/news',
-            component:News
+            component:News,
+            children:[
+                {
+                    name:'xiang',
+                    path:'detail',
+                    component:Detail
+                }
+            ]
         }
     ]
 })
